@@ -1,1 +1,0 @@
-criar o projeto laravel e integrar

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Diario extends Model
 {
     use HasFactory;
+
+     protected $fillable = [
+        'titulo',
+        'conteudo'
+    ];
 }

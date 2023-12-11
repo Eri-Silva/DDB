@@ -38,8 +38,8 @@
       <div class="container">
       	<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ftco-animate fadeInUp ftco-animated">
-            <h1 class="big big-2">Tarefas</h1>
-            <h2 class="mb-4">Tarefas</h2>
+            <h1 class="big big-2">Anotações</h1>
+            <h2 class="mb-4">Anotações</h2>
 
             
           </div>
@@ -56,18 +56,18 @@ Adicionar +
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Adicionar Tarefa</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar Anotação</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="row no-gutters block-9">
-          <div class="col-md-6 order-md-last d-flex">
+
+
             <form action="#" class="bg-light p-4 p-md-5 contact-form">
               @csrf
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Tarefa">
+                <input type="text" class="form-control" placeholder="Anotação">
               </div>
               <div class="form-group">
                 <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Descrição"></textarea>
@@ -76,14 +76,10 @@ Adicionar +
                 <input type="submit" value="Adicionar tarefa" class="btn btn-primary py-3 px-5">
               </div>
             </form>
-          </div>
-          <div class="col-md-6 d-flex">
-            <div class="img" style="background-image: url(images/capa_caderno.png);"></div>
-          </div>
-        </div>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="close" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
@@ -91,9 +87,6 @@ Adicionar +
 
            
         <div class="row d-flex contact-info mb-5">
-          
-       
-
           <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
           	<div class="align-self-stretch box p-4 text-center">
           		<div class="icon d-flex align-items-center justify-content-center">
@@ -102,37 +95,48 @@ Adicionar +
           		<h3 class="mb-4">Lavar a louça</h3>
 	            <p>Todos os dias, depois do almoço</p>
               <div class="form-group">
-                <!-- Botão "Editar" -->
-<button type="button" class="btn btn-primary py-1 px-3" data-toggle="modal" data-target="#editarModal">
-  Editar
-</button>
 
-<!-- Modal "Editar" -->
+                <button type="button" class="btn btn-primary py-1 px-3" data-toggle="modal" data-target="#editarModal">
+                  Editar
+                </button>
+                <button type="button" class="btn btn-primary py-1 px-3" data-toggle="modal" data-target="#excluirModal">
+                  Excluir
+                </button>
+
+              </div>     
+	          </div>
+          </div>
+
+          <!-- Modal "Editar" -->
 <div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editarModalLabel">Editar Item</h5>
+        <h5 class="modal-title" id="editarModalLabel">Editar Tarefa</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <!-- Adicione aqui o formulário de edição ou qualquer conteúdo relacionado à edição -->
-        <p>Conteúdo do formulário de edição aqui.</p>
+        <form action="#" class="bg-light p-4 p-md-5 contact-form">
+          @csrf
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Nova Tarefa">
+          </div>
+          <div class="form-group">
+            <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Nova Descrição"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Salvar Alterações" class="btn btn-primary py-3 px-5">
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar Alterações</button>
+        <button type="button" class="close" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Botão "Excluir" -->
-<button type="button" class="btn btn-primary py-1 px-3" data-toggle="modal" data-target="#excluirModal">
-  Excluir
-</button>
 
 <!-- Modal "Excluir" -->
 <div class="modal fade" id="excluirModal" tabindex="-1" role="dialog" aria-labelledby="excluirModalLabel" aria-hidden="true">
@@ -148,114 +152,14 @@ Adicionar +
         <p>Tem certeza de que deseja excluir este item?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="close" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-danger">Confirmar Exclusão</button>
       </div>
     </div>
   </div>
 </div>
-
-              </div>       
-	          </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Lavar a louça</h3>
-	            <p>Todos os dias, depois do almoço</p>
-              <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-primary py-1 px-3">
-                <input type="submit" value="Excluir" class="btn btn-primary py-1 px-3">
-              </div>       
-	          </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Lavar a louça</h3>
-	            <p>Todos os dias, depois do almoço</p>
-              <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-primary py-1 px-3">
-                <input type="submit" value="Excluir" class="btn btn-primary py-1 px-3">
-              </div>       
-	          </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Lavar a louça</h3>
-	            <p>Todos os dias, depois do almoço</p>
-              <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-primary py-1 px-3">
-                <input type="submit" value="Excluir" class="btn btn-primary py-1 px-3">
-              </div>       
-	          </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Lavar a louça</h3>
-	            <p>Todos os dias, depois do almoço</p>
-              <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-primary py-1 px-3">
-                <input type="submit" value="Excluir" class="btn btn-primary py-1 px-3">
-              </div>       
-	          </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Lavar a louça</h3>
-	            <p>Todos os dias, depois do almoço</p>
-              <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-primary py-1 px-3">
-                <input type="submit" value="Excluir" class="btn btn-primary py-1 px-3">
-              </div>       
-	          </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Lavar a louça</h3>
-	            <p>Todos os dias, depois do almoço</p>
-              <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-primary py-1 px-3">
-                <input type="submit" value="Excluir" class="btn btn-primary py-1 px-3">
-              </div>       
-	          </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Lavar a louça</h3>
-	            <p>Todos os dias, depois do almoço</p>
-              <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-primary py-1 px-3">
-                <input type="submit" value="Excluir" class="btn btn-primary py-1 px-3">
-              </div>       
-	          </div>
-          </div>
+   
+<!-- end -->
 
         </div> 
       </div>
@@ -289,6 +193,18 @@ Adicionar +
   <script>
     function mostrar_modal() {
             let idModal = document.getElementById('caixa_lancamento');
+            let modal_lancamento = new bootstrap.Modal(idModal);
+            modal_lancamento.show();
+        }
+
+        function mostrar_modal_2() {
+            let idModal = document.getElementById('caixa_lancamento_2');
+            let modal_lancamento = new bootstrap.Modal(idModal);
+            modal_lancamento.show();
+        }
+
+        function mostrar_modal_3() {
+            let idModal = document.getElementById('caixa_lancamento_3');
             let modal_lancamento = new bootstrap.Modal(idModal);
             modal_lancamento.show();
         }

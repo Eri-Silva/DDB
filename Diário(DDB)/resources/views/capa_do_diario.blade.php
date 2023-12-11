@@ -37,7 +37,7 @@
 	      	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images/bg_1.png);">
+	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images/meu_diario.jpg);">
 	          		<div class="overlay"></div>
 	          	</div>
 		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
@@ -45,7 +45,7 @@
 		          		<span class="subheading">Bem-Vinda!</span>
 			            <h1 class="mb-4 mt-3">Diário <span>Digiatal</span> da Bia</h1>
 			            <!-- <h2 class="mb-4">Registre seu dia</h2> -->
-			            <p><a href="/diario" class="btn btn-primary py-3 px-4">Diário</a> <a href="/tarefas" class="btn btn-white btn-outline-white py-3 px-4">Tarefas</a></p>
+			            <p><a href="/diario" class="btn btn-primary py-3 px-4">Diário</a> <a href="/tarefas" class="btn btn-white btn-outline-white py-3 px-4">Anotações</a></p>
 		            </div>
 		          </div>
 	        	</div>
@@ -56,14 +56,14 @@
 	      	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row d-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images/bg_2.png);">
+	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images/meu_diario_2.jpg);">
 	          		<div class="overlay"></div>
 	          	</div>
 		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 		          	<div class="text">
 		          		<span class="subheading">Bem-Vinda!</span>
 			            <h1 class="mb-4 mt-3">Diário <span>Digiatal</span> da Bia</h1>
-			            <p><a href="/diario" class="btn btn-primary py-3 px-4">Diário</a> <a href="/tarefas" class="btn btn-white btn-outline-white py-3 px-4">Tarefas</a></p>
+			            <p><a href="/diario" class="btn btn-primary py-3 px-4">Diário</a> <a href="/tarefas" class="btn btn-white btn-outline-white py-3 px-4">Anotações</a></p>
 		            </div>
 		          </div>
 	        	</div>

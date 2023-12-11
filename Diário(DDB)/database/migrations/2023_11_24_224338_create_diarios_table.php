@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('diarios', function (Blueprint $table) {
             $table->id();
+            $table->text('titulo');
+            $table->text('conteudo');
             $table->timestamps();
         });
     }

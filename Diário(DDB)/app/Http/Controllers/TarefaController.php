@@ -11,4 +11,19 @@ class TarefaController extends Controller
     {
         return view('tarefas.index');
     }
+
+    public function store()
+    {
+        return view('diario.index');
+    }
+
+    public function update()
+    {
+        return view('diario.index');
+    }
+
+    public function delete()
+    {
+        return view('diario.index');
+    }
 }

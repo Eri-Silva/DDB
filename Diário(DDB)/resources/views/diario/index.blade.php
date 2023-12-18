@@ -35,10 +35,8 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
- 
-
   <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
-      <div class="container">
+  <div class="container">
         <button type="button" class="btn btn-primary py-3 px-3" data-toggle="modal" data-target="#cadastrarDiarioModal">
   Escrever uma nova página
       </button>
@@ -47,12 +45,15 @@
             <h1 class="big big-2">Diário</h1>
             <h2 class="mb-4">Diário</h2>
           </div>
-         
-
         </div>
-         
+</section>
 
-        
+
+<!-- 
+retirei o id id="contact-section" da section por causa que dava conflito -->
+  <section class="ftco-section contact-section ftco-no-pb">
+     
+        @foreach ($diarios as $diario)
 
         <div class="row no-gutters block-9">
           <div class="col-md-6 order-md-last d-flex">
@@ -60,11 +61,13 @@
             <form action="#" class="bg-light p-4 p-md-5 contact-form">
 
 		          <div class="col-md-12 heading-section ftco-animate fadeInUp ftco-animated">
-		            <p>Fui na casa da vovó no dia 19 de Abril - 2023</p>
+                    <p>{{$diario->titulo}}</p>
 		            <ul class="about-info mt-4 px-md-0 px-2">
-		            	<li class="d-flex">Correndo pelas matas da Floresta, o Caçador ainda estava à procura dos dois, Chapeuzinho com medo e com frio procurava um lugar para passar a noite longe das garras do maldoso Caçador, o Lobo a ajudava a procurar, até que o maldoso caçador encontrou os dois, pulou em cima do pobre Lobo, e os dois brigavam, Chapeuzinho teve que fugir enquanto o Lobo o segurava, até que ela tropeçou e desmaiou, e então ela acordou e viu que estava em sua cama macia e confortável, tudo aquilo foi um baita sonho estranho... FIM :D</li>
+		            	<li class="d-flex">{{$diario->conteudo}}</li>
 		            </ul>
 		          </div>
+
+             
               <button type="button" class="btn btn-primary py-3 px-3" data-toggle="modal" data-target="#editarDiarioModal">
   Editar
 </button>
@@ -72,6 +75,7 @@
 <button type="button" class="btn btn-primary py-3 px-3" data-toggle="modal" data-target="#excluirDiarioModal">
   Excluir
 </button>
+
             </form>
             
 
@@ -82,28 +86,30 @@
         </div>
       </div>
 
-      
+       @endforeach
     </section>
+
+   
 
     <!-- Modal "Cadastrar Diário" -->
 <div class="modal fade" id="cadastrarDiarioModal" tabindex="-1" role="dialog" aria-labelledby="cadastrarDiarioModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="cadastrarDiarioModalLabel">Cadastrar Diário</h5>
+        <h5 class="modal-title" id="cadastrarDiarioModalLabel" style="color:black">Cadastrar Diário</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="#" class="bg-light p-4 p-md-5 contact-form">
+        <form action="{{ route('diario.store') }}" class="bg-light p-4 p-md-5 contact-form" method="post">
           @csrf
           <div class="form-group">
             <input type="text" name="titulo" class="form-control" placeholder="Título">
           </div>
 
           <div class="form-group">
-            <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Conteúdo da página"></textarea>
+            <textarea name="conteudo" cols="30" rows="7" class="form-control" placeholder="Conteúdo da página"></textarea>
           </div>
 
           <div class="form-group">
@@ -112,32 +118,35 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="close" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal "Editar Diário" -->
+<!-- Modal "Editar Página" -->
 <div class="modal fade" id="editarDiarioModal" tabindex="-1" role="dialog" aria-labelledby="editarDiarioModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editarDiarioModalLabel">Editar Diário</h5>
+        <h5 class="modal-title" id="editarDiarioModalLabel" style="color:black">Editar Página</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="#" class="bg-light p-4 p-md-5 contact-form">
+        <form action="{{ route('diario.update', $diario->id) }}" method="POST" class="bg-light p-4 p-md-5 contact-form">
           @csrf
+          @method('PUT')
 
           <div class="form-group">
-            <input type="text" name="titulo" class="form-control" placeholder="Título">
+            <label for="titulo">Título</label>
+            <input type="text" name="titulo" class="form-control" value="{{ $diario->titulo }}" placeholder="Digite o título">
           </div>
 
           <div class="form-group">
-            <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Novo conteúdo da página"></textarea>
+            <label for="conteudo">Conteúdo</label>
+            <textarea name="conteudo" id="conteudo" cols="30" rows="7" class="form-control" placeholder="Digite o conteúdo">{{ $diario->conteudo }}</textarea>
           </div>
 
           <div class="form-group">
@@ -147,18 +156,19 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="close" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
 </div>
+
 
 <!-- Modal "Excluir Diário" -->
 <div class="modal fade" id="excluirDiarioModal" tabindex="-1" role="dialog" aria-labelledby="excluirDiarioModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="excluirDiarioModalLabel">Confirmar Exclusão</h5>
+        <h5 class="modal-title" id="excluirDiarioModalLabel" style="color:black">Confirmar Exclusão</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -168,7 +178,13 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="close" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger">Confirmar Exclusão</button>
+        
+        <!-- Adicionando o formulário de exclusão -->
+        <form id="formDelete" action="{{ route('diario.destroy', $diario->id) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+        </form>
       </div>
     </div>
   </div>

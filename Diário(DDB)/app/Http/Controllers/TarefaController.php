@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tarefa;
 use Illuminate\Http\Request;
 
 class TarefaController extends Controller
@@ -9,12 +10,23 @@ class TarefaController extends Controller
     //
     public function index()
     {
-        return view('tarefas.index');
+        $anotacoes = Tarefa::all();
+        return view('tarefas.index', compact('anotacoes'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        return view('diario.index');
+        $request->validate([
+            'titulo' => 'required|string',
+            'tarefa' => 'required|string',
+        ]);
+
+        Tarefa::create([
+            'titulo' => $request->titulo,
+            'tarefa' => $request->tarefa,
+        ]);
+
+        return redirect()->route('tarefas.index')->with('success', 'Anotação criada com sucesso.');
     }
 
     public function update()

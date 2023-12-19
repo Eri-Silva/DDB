@@ -32,31 +32,12 @@
 	    </div>
 	  </nav>
 
-                          
-
-  <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
-      <div class="container">
-      	<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section text-center ftco-animate fadeInUp ftco-animated">
-            <h1 class="big big-2">Anotações</h1>
-            <h2 class="mb-4">Anotações</h2>
-
-            
-          </div>
-
-          <!-- Botão que abre o modal -->
-          <div class="form-group">
-<button type="button" class="btn btn-primary py-3 px-5" data-toggle="modal" data-target="#myModal">
-Adicionar +
-</button>
-  </div>
-
 <!-- O Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Adicionar Anotação</h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="color:black">Adicionar Anotação</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -64,16 +45,16 @@ Adicionar +
       <div class="modal-body">
 
 
-            <form action="#" class="bg-light p-4 p-md-5 contact-form">
+            <form action="{{route('tarefas.store')}}" method="POST" class="bg-light p-4 p-md-5 contact-form">
               @csrf
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Anotação">
+                <input type="text" name="titulo" class="form-control" placeholder="Anotação">
               </div>
               <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Descrição"></textarea>
+                <textarea name="tarefa" id="" cols="30" rows="7" class="form-control" placeholder="Descrição"></textarea>
               </div>
               <div class="form-group">
-                <input type="submit" value="Adicionar tarefa" class="btn btn-primary py-3 px-5">
+                <input type="submit" value="Adicionar anotação" class="btn btn-primary py-3 px-5">
               </div>
             </form>
 
@@ -85,15 +66,18 @@ Adicionar +
   </div>
 </div>
 
-           
-        <div class="row d-flex contact-info mb-5">
+          
+        <!-- <div class="row d-flex contact-info mb-5">
+   
           <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
+                 
           	<div class="align-self-stretch box p-4 text-center">
+                @foreach($anotacoes as $anotacao) 
           		<div class="icon d-flex align-items-center justify-content-center">
           			<span class="icon-map-signs"></span>
           		</div>
-          		<h3 class="mb-4">Lavar a louça</h3>
-	            <p>Todos os dias, depois do almoço</p>
+          		<h3 class="mb-4">{{$anotacao->titulo}}</h3>
+	            <p>{{$anotacao->tarefa}}</p>
               <div class="form-group">
 
                 <button type="button" class="btn btn-primary py-1 px-3" data-toggle="modal" data-target="#editarModal">
@@ -102,10 +86,61 @@ Adicionar +
                 <button type="button" class="btn btn-primary py-1 px-3" data-toggle="modal" data-target="#excluirModal">
                   Excluir
                 </button>
-
-              </div>     
+@endforeach 
+              </div>
+                  
 	          </div>
+             
+          </div> -->
+
+          <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
+      <div class="container">
+      	<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate fadeInUp ftco-animated">
+            <h1 class="big big-2">Anotações</h1>
+            <h2 class="mb-4">Anotações</h2>
+            <p> <!-- Botão que abre o modal -->
+          <div class="form-group">
+<button type="button" class="btn btn-primary py-3 px-5" data-toggle="modal" data-target="#myModal">
+Adicionar +
+</button>
+
+  </div></p>
+  @if(session('success'))
+    <div class="alert alert-primary">
+        {{ session('success') }}
+    </div>
+@endif
           </div>
+        </div>
+
+        
+        <div class="row d-flex contact-info mb-5">
+           @foreach($anotacoes as $anotacao)
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate fadeInUp ftco-animated">
+          <div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-map-signs"></span>
+          		</div>
+          		<h3 class="mb-4">{{$anotacao->titulo}}</h3>
+	            <p>{{$anotacao->tarefa}}</p>
+
+              <button type="button" class="btn btn-primary py-1 px-3" data-toggle="modal" data-target="#editarModal">
+                  Editar
+                </button>
+                <button type="button" class="btn btn-primary py-1 px-3" data-toggle="modal" data-target="#excluirModal">
+                  Excluir
+                </button>
+            
+            </div>
+          </div>
+          @endforeach
+
+        </div>
+
+      </div>
+    </section>
+         
 
           <!-- Modal "Editar" -->
 <div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">

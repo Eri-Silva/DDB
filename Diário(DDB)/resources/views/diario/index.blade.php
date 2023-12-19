@@ -44,6 +44,13 @@
           <div class="col-md-7 heading-section text-center ftco-animate fadeInUp ftco-animated">
             <h1 class="big big-2">Diário</h1>
             <h2 class="mb-4">Diário</h2>
+
+            @if(session('success'))
+    <div class="alert alert-primary">
+        {{ session('success') }}
+    </div>
+@endif
+
           </div>
         </div>
 </section>
@@ -52,8 +59,8 @@
 <!-- 
 retirei o id id="contact-section" da section por causa que dava conflito -->
   <section class="ftco-section contact-section ftco-no-pb">
-     
-        @foreach ($diarios as $diario)
+  
+        @foreach ($diarios->reverse() as $diario)
 
         <div class="row no-gutters block-9">
           <div class="col-md-6 order-md-last d-flex">
@@ -68,9 +75,10 @@ retirei o id id="contact-section" da section por causa que dava conflito -->
 		          </div>
 
              
-              <button type="button" class="btn btn-primary py-3 px-3" data-toggle="modal" data-target="#editarDiarioModal">
-  Editar
+              <button type="button" class="btn btn-primary py-3 px-3 btn-editar" data-toggle="modal" data-target="#editarDiarioModal" >
+    Editar
 </button>
+
 
 <button type="button" class="btn btn-primary py-3 px-3" data-toggle="modal" data-target="#excluirDiarioModal">
   Excluir
@@ -120,6 +128,7 @@ retirei o id id="contact-section" da section por causa que dava conflito -->
       <div class="modal-footer">
         <button type="button" class="close" data-dismiss="modal">Fechar</button>
       </div>
+
     </div>
   </div>
 </div>
@@ -135,18 +144,18 @@ retirei o id id="contact-section" da section por causa que dava conflito -->
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('diario.update', $diario->id) }}" method="POST" class="bg-light p-4 p-md-5 contact-form">
+        <form action="#" method="POST" class="bg-light p-4 p-md-5 contact-form">
           @csrf
           @method('PUT')
 
           <div class="form-group">
             <label for="titulo">Título</label>
-            <input type="text" name="titulo" class="form-control" value="{{ $diario->titulo }}" placeholder="Digite o título">
+            <input type="text" name="titulo" class="form-control" value="" placeholder="Digite o título">
           </div>
 
           <div class="form-group">
             <label for="conteudo">Conteúdo</label>
-            <textarea name="conteudo" id="conteudo" cols="30" rows="7" class="form-control" placeholder="Digite o conteúdo">{{ $diario->conteudo }}</textarea>
+            <textarea name="conteudo" id="conteudo" cols="30" rows="7" class="form-control" placeholder="Digite o conteúdo"></textarea>
           </div>
 
           <div class="form-group">
@@ -180,7 +189,7 @@ retirei o id id="contact-section" da section por causa que dava conflito -->
         <button type="button" class="close" data-dismiss="modal">Cancelar</button>
         
         <!-- Adicionando o formulário de exclusão -->
-        <form id="formDelete" action="{{ route('diario.destroy', $diario->id) }}" method="POST">
+        <form id="formDelete" action="#" method="POST">
           @csrf
           @method('DELETE')
           <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
@@ -205,6 +214,7 @@ retirei o id id="contact-section" da section por causa que dava conflito -->
   <script src="js/scrollax.min.js"></script>
   
   <script src="js/main.js"></script>
+
     
   </body>
 </html>

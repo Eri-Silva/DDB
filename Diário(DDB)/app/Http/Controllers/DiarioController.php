@@ -29,26 +29,21 @@ class DiarioController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'titulo' => 'required|string',
-            'conteudo' => 'required|string',
-        ]);
+{
+        $post = Diario::find($id);
+    $post->update($request->all());
+    return redirect()->route('diario.index')
+      ->with('success', 'Página editada.');
 
-        $diario = Diario::findOrFail($id);
-        $diario->update([
-            'titulo' => $request->titulo,
-            'conteudo' => $request->conteudo,
-        ]);
+    // Lidar com o caso em que a tarefa não foi encontrada (por exemplo, redirecionar ou mostrar uma mensagem de erro)
+}
 
-        return redirect()->route('diario.index')->with('success', 'Página do diário atualizada com sucesso.');
-    }
 
     public function destroy($id)
     {
-        $diario = Diario::findOrFail($id);
-        $diario->delete();
-
-        return redirect()->route('diario.index')->with('success', 'Página do diário deletada com sucesso.');
+        $post = Diario::find($id);
+        $post->delete();
+        return redirect()->route('diario.index')
+          ->with('success', 'Página excluída com sucesso');
     }
 }

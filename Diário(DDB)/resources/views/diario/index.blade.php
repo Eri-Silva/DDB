@@ -4,12 +4,12 @@
     <title>DDB - Diário Digital da Bia</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-    
+
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -17,21 +17,21 @@
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/ionicons.min.css">
-    
+
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	  
-	  
+
+
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="/">DDB</a>
 	    </div>
 	  </nav>
 
-     
+
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
@@ -56,15 +56,15 @@
 </section>
 
 
-<!-- 
+<!--
 retirei o id id="contact-section" da section por causa que dava conflito -->
   <section class="ftco-section contact-section ftco-no-pb">
-  
+
         @foreach ($diarios->reverse() as $diario)
 
         <div class="row no-gutters block-9">
           <div class="col-md-6 order-md-last d-flex">
-            
+
             <form action="#" class="bg-light p-4 p-md-5 contact-form">
 
 		          <div class="col-md-12 heading-section ftco-animate fadeInUp ftco-animated">
@@ -74,18 +74,18 @@ retirei o id id="contact-section" da section por causa que dava conflito -->
 		            </ul>
 		          </div>
 
-             
-              <button type="button" class="btn btn-primary py-3 px-3 btn-editar" data-toggle="modal" data-target="#editarDiarioModal" >
+
+              <button type="button" class="btn btn-primary py-3 px-3 btn-editar" data-toggle="modal" data-target="#editarDiarioModal{{ $diario->id }}" >
     Editar
 </button>
 
 
-<button type="button" class="btn btn-primary py-3 px-3" data-toggle="modal" data-target="#excluirDiarioModal">
+<button type="button" class="btn btn-primary py-3 px-3" data-toggle="modal" data-target="#excluirDiarioModal{{ $diario->id }}">
   Excluir
 </button>
 
             </form>
-            
+
 
           </div>
           <div class="col-md-6 d-flex">
@@ -94,10 +94,77 @@ retirei o id id="contact-section" da section por causa que dava conflito -->
         </div>
       </div>
 
+
+<!-- Modal "Editar Página" -->
+<div class="modal fade" id="editarDiarioModal{{ $diario->id }}" tabindex="-1" role="dialog" aria-labelledby="editarDiarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarDiarioModalLabel" style="color:black">Editar Página</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{{route('diario.update', ['diario' => $diario->id])}}" method="POST" class="bg-light p-4 p-md-5 contact-form">
+            @csrf
+            @method('PUT')
+
+            <div class="form-group">
+              <label for="titulo">Título</label>
+              <input type="text" name="titulo" class="form-control" value="{{$diario->titulo}}" placeholder="Digite o título">
+            </div>
+
+            <div class="form-group">
+              <label for="conteudo">Conteúdo</label>
+              <textarea name="conteudo" id="conteudo" cols="30" rows="7" class="form-control" placeholder="Digite o conteúdo">{{$diario->conteudo}}</textarea>
+            </div>
+
+            <div class="form-group">
+              <input type="submit" value="Salvar Alterações" class="btn btn-primary py-3 px-5">
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="close" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal "Excluir Diário" -->
+  <div class="modal fade" id="excluirDiarioModal{{ $diario->id }}" tabindex="-1" role="dialog" aria-labelledby="excluirDiarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="excluirDiarioModalLabel" style="color:black">Confirmar Exclusão</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Tem certeza de que deseja excluir esta página do diário?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="close" data-dismiss="modal">Cancelar</button>
+
+          <!-- Adicionando o formulário de exclusão -->
+          <form id="formDelete" action="{{route('diario.destroy', ['diario' => $diario->id])}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
        @endforeach
     </section>
 
-   
+
 
     <!-- Modal "Cadastrar Diário" -->
 <div class="modal fade" id="cadastrarDiarioModal" tabindex="-1" role="dialog" aria-labelledby="cadastrarDiarioModalLabel" aria-hidden="true">
@@ -133,71 +200,16 @@ retirei o id id="contact-section" da section por causa que dava conflito -->
   </div>
 </div>
 
-<!-- Modal "Editar Página" -->
-<div class="modal fade" id="editarDiarioModal" tabindex="-1" role="dialog" aria-labelledby="editarDiarioModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editarDiarioModalLabel" style="color:black">Editar Página</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="#" method="POST" class="bg-light p-4 p-md-5 contact-form">
-          @csrf
-          @method('PUT')
+<footer class="ftco-footer ftco-section">
+      <div class="container">
+          <div class="col-md-12 text-center">
 
-          <div class="form-group">
-            <label for="titulo">Título</label>
-            <input type="text" name="titulo" class="form-control" value="" placeholder="Digite o título">
-          </div>
-
-          <div class="form-group">
-            <label for="conteudo">Conteúdo</label>
-            <textarea name="conteudo" id="conteudo" cols="30" rows="7" class="form-control" placeholder="Digite o conteúdo"></textarea>
-          </div>
-
-          <div class="form-group">
-            <input type="submit" value="Salvar Alterações" class="btn btn-primary py-3 px-5">
-          </div>
-
-        </form>
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright ©<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="close" data-dismiss="modal">Fechar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal "Excluir Diário" -->
-<div class="modal fade" id="excluirDiarioModal" tabindex="-1" role="dialog" aria-labelledby="excluirDiarioModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="excluirDiarioModalLabel" style="color:black">Confirmar Exclusão</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Tem certeza de que deseja excluir esta página do diário?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="close" data-dismiss="modal">Cancelar</button>
-        
-        <!-- Adicionando o formulário de exclusão -->
-        <form id="formDelete" action="#" method="POST">
-          @csrf
-          @method('DELETE')
-          <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+    </footer>
 
 
   <script src="js/jquery.min.js"></script>
@@ -212,9 +224,9 @@ retirei o id id="contact-section" da section por causa que dava conflito -->
   <script src="js/aos.js"></script>
   <script src="js/jquery.animateNumber.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-  
+
   <script src="js/main.js"></script>
 
-    
+
   </body>
 </html>

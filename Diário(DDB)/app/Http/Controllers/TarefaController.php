@@ -29,13 +29,22 @@ class TarefaController extends Controller
         return redirect()->route('tarefas.index')->with('success', 'Anotação criada com sucesso.');
     }
 
-    public function update()
-    {
-        return view('diario.index');
-    }
+    public function update(Request $request, $id)
+{
+        $post = Tarefa::find($id);
+    $post->update($request->all());
+    return redirect()->route('tarefas.index')
+      ->with('success', 'Anotação editada.');
 
-    public function delete()
+    // Lidar com o caso em que a tarefa não foi encontrada (por exemplo, redirecionar ou mostrar uma mensagem de erro)
+}
+
+
+    public function destroy($id)
     {
-        return view('diario.index');
+        $post = Tarefa::find($id);
+        $post->delete();
+        return redirect()->route('tarefas.index')
+          ->with('success', 'Anotação excluída com sucesso');
     }
 }

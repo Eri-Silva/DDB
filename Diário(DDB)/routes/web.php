@@ -19,5 +19,5 @@ Route::get('/', function () {
     return view('capa_do_diario');
 });
 
-Route::resource('/diario', DiarioController::class);
-Route::resource('/tarefas', TarefaController::class);
+Route::resource('diario', DiarioController::class);
+Route::resource('tarefas', TarefaController::class);

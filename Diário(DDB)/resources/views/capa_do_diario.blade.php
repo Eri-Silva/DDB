@@ -43,7 +43,7 @@
 		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 		          	<div class="text">
 		          		<span class="subheading">Bem-Vinda!</span>
-			            <h1 class="mb-4 mt-3">Diário <span>Digiatal</span> da Bia</h1>
+			            <h1 class="mb-4 mt-3">Diário <span>Digital</span> da Bia</h1>
 			            <!-- <h2 class="mb-4">Registre seu dia</h2> -->
 			            <p><a href="/diario" class="btn btn-primary py-3 px-4">Diário</a> <a href="/tarefas" class="btn btn-white btn-outline-white py-3 px-4">Anotações</a></p>
 		            </div>
@@ -62,7 +62,7 @@
 		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 		          	<div class="text">
 		          		<span class="subheading">Bem-Vinda!</span>
-			            <h1 class="mb-4 mt-3">Diário <span>Digiatal</span> da Bia</h1>
+			            <h1 class="mb-4 mt-3">Diário <span>Digital</span> da Bia</h1>
 			            <p><a href="/diario" class="btn btn-primary py-3 px-4">Diário</a> <a href="/tarefas" class="btn btn-white btn-outline-white py-3 px-4">Anotações</a></p>
 		            </div>
 		          </div>
